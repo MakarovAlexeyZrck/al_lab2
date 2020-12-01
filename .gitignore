@@ -30,3 +30,17 @@
 *.exe
 *.out
 *.app
+.vs/al_lab2/v16/.suo
+*.db
+*.db-shm
+*.db-wal
+*.opendb
+*.ipch
+*.recipe
+Debug/al_lab2.tlog/link.read.1.tlog
+*.tlog
+*.pdb
+*.txt
+*.ilk
+*.idb
+*.log
