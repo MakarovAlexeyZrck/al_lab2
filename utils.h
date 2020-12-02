@@ -16,7 +16,7 @@ inline int is_invalidinput(string msg) {
         cin.ignore(1000, '\n');
         cout << msg;
         cin >> user_input;
-    } while (cin.fail() || user_input < 0 || user_input > 7);
+    } while (cin.fail() || user_input < 0 || user_input > 9);
 
     return user_input;
 }

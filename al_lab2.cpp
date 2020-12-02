@@ -98,7 +98,7 @@ void show_all(int is_trumpet, int is_ks, vector<trumpet> trumpets_data, vector<k
         int trumpets_count;
         trumpets_count = trumpets_data.size();
         if (trumpets_count == 0) {
-            cout << "\nТрубы не добавлены. Введите 1 для добавлениия труб ..." << endl << endl;
+            cout << "\nТрубы не добавлены. Введите 1 для добавлениия труб ..." << endl;
         }
         else
         {
@@ -115,7 +115,7 @@ void show_all(int is_trumpet, int is_ks, vector<trumpet> trumpets_data, vector<k
         int kss_count;
         kss_count = kss_data.size();
         if (kss_count == 0) {
-            cout << "\nКС отсутствуют. Введите 2 для добавлениия КС ..." << endl << endl;
+            cout << "\nКС отсутствуют. Введите 2 для добавлениия КС ..." << endl;
         }
         else
         {
@@ -283,6 +283,94 @@ void output_data(vector<trumpet> trumpets_data, vector<ks> kss_data) {
 }
 
 
+// Удаление объектов по идентификатору
+void delete_objects(vector<trumpet>& trumpets_data, vector<ks>& ks_data, const bool object_id) {
+
+
+    // Если пользователь решил удалить трубу
+    if (object_id == 0) {
+
+        bool was_delete = false;
+
+        cout << "Выбран пункт для удаления трубы" << endl;
+
+        // Выведем все трубы
+        show_all(1, 0, trumpets_data, ks_data);
+
+        if (trumpets_data.size() == 0) {
+
+        }
+        else {
+
+            int counter = 0;
+
+            // Запросим от пользователя идентификатор трубы, которую он хочет удалить
+            int useless_trumpet;
+            useless_trumpet = is_integer("Введите идентификатор трубы, которую хотите удалить: ");
+
+            // Поиск трубы и удаление
+            for (auto& im : trumpets_data) {
+                if (im.id == useless_trumpet) {
+                    trumpets_data.erase(trumpets_data.begin() + counter);
+                    was_delete = true;
+                    cout << "Труба удалена!" << endl << endl;
+                }
+                counter = counter + 1;
+            }
+
+            // Если удаление не произошло и при этом трубы есть в массиве - выводим сообщение
+            if ((was_delete == false) & (trumpets_data.size() != 0)) {
+                cout << "Проверьте идентификатор и запустите функцию снова. Трубы с данным идентификатором не существует" << endl << endl;
+            }
+
+        }
+  
+    }
+
+    // Если пользователь решил удалить КС
+    if (object_id == 1) {
+
+        bool was_delete = false;
+
+        cout << "Выбран пункт для удаления КС" << endl;
+
+        // Выведем все трубы
+        show_all(0, 1, trumpets_data, ks_data);
+
+        if (ks_data.size() == 0) {
+
+        }
+        else {
+
+            int counter = 0;
+
+            // Запросим от пользователя идентификатор трубы, которую он хочет удалить
+            int useless_trumpet;
+            useless_trumpet = is_integer("Введите идентификатор КС, которую хотите удалить: ");
+
+            // Поиск трубы и удаление
+            for (auto& im : ks_data) {
+                if (im.id == useless_trumpet) {
+                    ks_data.erase(ks_data.begin() + counter);
+                    was_delete = true;
+                    cout << "КС удалена!" << endl << endl;
+                }
+                counter = counter + 1;
+            }
+
+            // Если удаление не произошло и при этом трубы есть в массиве - выводим сообщение
+            if ((was_delete == false) & (ks_data.size() != 0)) {
+                cout << "Проверьте идентификатор и запустите функцию снова. КС с данным идентификатором не существует" << endl << endl;
+            }
+
+        }
+
+    }
+
+
+}
+
+
 // Функция с вводом и проверкой начальной комманды первоначальной команды
 int main_menu(vector<trumpet>& trumpets_data, vector<ks>& ks_data)
 {
@@ -295,6 +383,8 @@ int main_menu(vector<trumpet>& trumpets_data, vector<ks>& ks_data)
             "5. Редактировать КС" << endl <<
             "6. Загрузить" << endl <<
             "7. Сохранить" << endl <<
+            "8. Удаление трубы" << endl <<
+            "9. Удаление КС" << endl <<
             "0. Выход" << endl;;
 
     // Ввода пользователя (защита от текстового ввода, отр. чисел, чисел > кол-ва пунктов в меню
@@ -352,13 +442,26 @@ int main_menu(vector<trumpet>& trumpets_data, vector<ks>& ks_data)
         return 1;
     }
 
+    case 8:
+    {
+        cout << endl << " --- Удаление труб --- " << endl;
+        delete_objects(trumpets_data, ks_data, 0);
+        return 1;
+    }
+
+    case 9:
+    {
+        cout << endl << " --- Удаление КС --- " << endl;
+        delete_objects(trumpets_data, ks_data, 1);
+        return 1;
+    }
+
     case 0:
     {
         return 0;
     }
 
     }
-
 
 }
 
